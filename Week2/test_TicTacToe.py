@@ -68,6 +68,53 @@ class TestTicTacToeGame(unittest.TestCase):
         self.assertFalse(self.game.is_coordinate_in_column_range(100))
         self.assertFalse(self.game.is_coordinate_in_column_range(-200))
 
+    def test_is_empty(self):
+        self.game.gameState = [['X', ' ', 'O'], [' ', ' ', ' '],
+        ['O', ' ', 'X']]
+
+        # testing empty boxes
+        self.assertTrue(self.game.is_empty(0, 1))
+        self.assertTrue(self.game.is_empty(1, 2))
+
+        # testing not empty boxes
+        self.assertFalse(self.game.is_empty(0, 0))
+        self.assertFalse(self.game.is_empty(2, 0))
+
+    def test_is_board_full(self):
+        self.assertFalse(self.game.is_board_full())
+
+        self.game.gameState = [['X', ' ', 'O'], [' ', ' ', ' '],
+        ['O', ' ', 'X']]
+
+        self.assertFalse(self.game.is_board_full())
+
+        self.game.gameState = [[' ', 'X', 'O'], ['O', 'X', 'X'],
+        ['O', 'O', 'X']]
+
+        self.assertFalse(self.game.is_board_full())
+
+        self.game.gameState = [['X', 'X', 'O'], ['O', 'X', 'X'],
+        ['O', 'O', ' ']]
+
+        self.assertFalse(self.game.is_board_full())
+
+        self.game.gameState = [['X', 'X', 'O'], ['O', 'X', 'X'],
+        ['O', 'O', 'X']]
+
+        self.assertTrue(self.game.is_board_full())
+
+        self.game.gameState = [['O', 'O', 'O'], ['O', 'O', 'O'],
+        ['O', 'O', 'O']]
+
+        self.assertTrue(self.game.is_board_full())
+
+        self.game.gameState = [['X', 'X', 'X'], ['X', 'X', 'X'],
+        ['X', 'X', 'X']]
+
+        self.assertTrue(self.game.is_board_full())
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
