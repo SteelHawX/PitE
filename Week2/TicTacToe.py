@@ -150,4 +150,5 @@ class TicTacToeUI:
             self.ask_for_coordinates()
             self.insert_value()
 
-TicTacToeUI().run()
+if __name__ == "__main__":
+    TicTacToeUI().run()
