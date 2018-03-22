@@ -44,6 +44,29 @@ class TestTicTacToeGame(unittest.TestCase):
             self.game.end_players_turn()
 
 
+    def test_is_coordinate_in_row_range(self):
+        # testing coordinates in range
+        self.assertTrue(self.game.is_coordinate_in_row_range(0))
+        self.assertTrue(self.game.is_coordinate_in_row_range(1))
+        self.assertTrue(self.game.is_coordinate_in_row_range(2))
+
+        # testing coordinates out of range
+        self.assertFalse(self.game.is_coordinate_in_row_range(-1))
+        self.assertFalse(self.game.is_coordinate_in_row_range(3))
+        self.assertFalse(self.game.is_coordinate_in_row_range(100))
+        self.assertFalse(self.game.is_coordinate_in_row_range(-200))
+
+    def test_is_coordinate_in_column_range(self):
+        # testing coordinates in range
+        self.assertTrue(self.game.is_coordinate_in_column_range(0))
+        self.assertTrue(self.game.is_coordinate_in_column_range(1))
+        self.assertTrue(self.game.is_coordinate_in_column_range(2))
+
+        # testing coordinates out of range
+        self.assertFalse(self.game.is_coordinate_in_column_range(-1))
+        self.assertFalse(self.game.is_coordinate_in_column_range(3))
+        self.assertFalse(self.game.is_coordinate_in_column_range(100))
+        self.assertFalse(self.game.is_coordinate_in_column_range(-200))
 
 
 if __name__ == "__main__":
