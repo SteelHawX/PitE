@@ -56,7 +56,7 @@ class TicTacToeGame:
         for column in range(len(self.gameState[0])):
             win = True
             for row in range(len(self.gameState)):
-                if self.gameState[column][row] is not self.turn:
+                if self.gameState[row][column] is not self.turn:
                     win = False
             if win is True:
                 return True
