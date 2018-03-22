@@ -113,6 +113,45 @@ class TestTicTacToeGame(unittest.TestCase):
 
         self.assertTrue(self.game.is_board_full())
 
+    def test_is_vertical_win_condition(self):
+        self.assertFalse(self.game.is_vertical_win_condition())
+
+        self.game.gameState = [[' ', ' ', 'O'], ['O', 'X', 'X'],
+        ['O', 'O', 'X']]
+
+        self.assertFalse(self.game.is_vertical_win_condition())
+
+        self.game.gameState = [['', 'X', 'X'], ['X', 'O', 'X'],
+        ['O', 'O', 'O']]
+
+        self.assertFalse(self.game.is_vertical_win_condition())
+
+        self.game.gameState = [[' ', 'X', 'O'], ['X', 'X', 'X'],
+        ['O', 'O', 'O']]
+
+        self.assertFalse(self.game.is_vertical_win_condition())
+
+        self.game.gameState = [['X', 'X', 'X'], ['O', 'O', 'X'],
+        ['O', 'O', 'X']]
+
+        self.assertTrue(self.game.is_vertical_win_condition())
+
+        self.game.gameState = [['X', 'O', 'X'], ['O', 'O', 'X'],
+        ['X', 'O', 'X']]
+
+        self.assertTrue(self.game.is_vertical_win_condition())
+
+        self.game.gameState = [['X', ' ', ' '], ['X', 'O', ' '],
+        ['X', 'O', ' ']]
+
+        self.assertTrue(self.game.is_vertical_win_condition())
+
+        self.game.gameState = [[' ', 'X', 'O'], ['X', 'X', 'O'],
+        ['O', 'X', 'O']]
+
+        self.assertTrue(self.game.is_vertical_win_condition())
+
+
 
 
 
