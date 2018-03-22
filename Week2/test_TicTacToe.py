@@ -12,6 +12,8 @@ class TestTicTacToeGame(unittest.TestCase):
         [' ', ' ', ' ']])
         self.assertEqual(self.game.turn, 'X')
 
+        pass
+
 
     def test_insert_value(self):
         # test player X
@@ -33,6 +35,8 @@ class TestTicTacToeGame(unittest.TestCase):
         self.assertEqual(self.game.gameState, [['X', ' ', 'O'], [' ', ' ', ' '],
         ['O', ' ', 'X']])
 
+        pass
+
     def test_end_players_turn(self):
         self.game.end_players_turn()
         self.assertEqual(self.game.turn, 'O')
@@ -42,6 +46,8 @@ class TestTicTacToeGame(unittest.TestCase):
         self.game.turn = '0'
         with self.assertRaises(NameError):
             self.game.end_players_turn()
+
+        pass
 
 
     def test_is_coordinate_in_row_range(self):
@@ -56,6 +62,8 @@ class TestTicTacToeGame(unittest.TestCase):
         self.assertFalse(self.game.is_coordinate_in_row_range(100))
         self.assertFalse(self.game.is_coordinate_in_row_range(-200))
 
+        pass
+
     def test_is_coordinate_in_column_range(self):
         # testing coordinates in range
         self.assertTrue(self.game.is_coordinate_in_column_range(0))
@@ -68,6 +76,8 @@ class TestTicTacToeGame(unittest.TestCase):
         self.assertFalse(self.game.is_coordinate_in_column_range(100))
         self.assertFalse(self.game.is_coordinate_in_column_range(-200))
 
+        pass
+
     def test_is_empty(self):
         self.game.gameState = [['X', ' ', 'O'], [' ', ' ', ' '],
         ['O', ' ', 'X']]
@@ -79,6 +89,8 @@ class TestTicTacToeGame(unittest.TestCase):
         # testing not empty boxes
         self.assertFalse(self.game.is_empty(0, 0))
         self.assertFalse(self.game.is_empty(2, 0))
+
+        pass
 
     def test_is_board_full(self):
         self.assertFalse(self.game.is_board_full())
@@ -112,6 +124,8 @@ class TestTicTacToeGame(unittest.TestCase):
         ['X', 'X', 'X']]
 
         self.assertTrue(self.game.is_board_full())
+
+        pass
 
     def test_is_vertical_win_condition(self):
         self.assertFalse(self.game.is_vertical_win_condition())
@@ -157,6 +171,8 @@ class TestTicTacToeGame(unittest.TestCase):
                                ['O', 'X', 'O']]
 
         self.assertTrue(self.game.is_vertical_win_condition())
+
+        pass
 
 
     def test_is_horizontal_win_condition(self):
@@ -206,6 +222,8 @@ class TestTicTacToeGame(unittest.TestCase):
 
         self.assertTrue(self.game.is_horizontal_win_condition())
 
+        pass
+
     def test_is_diagonal_win_condition(self):
         self.assertFalse(self.game.is_diagonal_win_condition())
 
@@ -253,6 +271,19 @@ class TestTicTacToeGame(unittest.TestCase):
         self.game.turn = 'O'
 
         self.assertTrue(self.game.is_diagonal_win_condition())
+
+        pass
+
+class TestTicTacToeUI(unittest.TestCase):
+    def setUp(self):
+        self.UI = TicTacToeUI()
+
+    def test_init(self):
+        self.assertEqual(self.UI.row, -1)
+        self.assertEqual(self.UI.column, -1)
+
+        pass
+
 
 
 
