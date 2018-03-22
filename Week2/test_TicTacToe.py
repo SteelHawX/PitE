@@ -116,42 +116,143 @@ class TestTicTacToeGame(unittest.TestCase):
     def test_is_vertical_win_condition(self):
         self.assertFalse(self.game.is_vertical_win_condition())
 
-        self.game.gameState = [[' ', ' ', 'O'], ['O', 'X', 'X'],
-        ['O', 'O', 'X']]
+        self.game.gameState = [[' ', ' ', 'O'],
+                               ['O', 'X', 'X'],
+                               ['O', 'O', 'X']]
 
         self.assertFalse(self.game.is_vertical_win_condition())
 
-        self.game.gameState = [['', 'X', 'X'], ['X', 'O', 'X'],
-        ['O', 'O', 'O']]
+        self.game.gameState = [[' ', 'X', 'X'],
+                               ['X', 'O', 'X'],
+                               ['O', 'O', 'O']]
 
         self.assertFalse(self.game.is_vertical_win_condition())
 
-        self.game.gameState = [[' ', 'X', 'O'], ['X', 'X', 'X'],
-        ['O', 'O', 'O']]
+        self.game.gameState = [[' ', 'X', 'O'],
+                               ['X', 'X', 'X'],
+                               ['O', 'O', 'O']]
 
         self.assertFalse(self.game.is_vertical_win_condition())
 
-        self.game.gameState = [['X', 'X', 'X'], ['O', 'O', 'X'],
-        ['O', 'O', 'X']]
+        self.game.gameState = [['X', 'X', 'X'],
+                               ['O', 'O', 'X'],
+                               ['O', 'O', 'X']]
 
         self.assertTrue(self.game.is_vertical_win_condition())
 
-        self.game.gameState = [['X', 'O', 'X'], ['O', 'O', 'X'],
-        ['X', 'O', 'X']]
+        self.game.gameState = [['X', 'O', 'X'],
+                               ['O', 'O', 'X'],
+                               ['X', 'O', 'X']]
 
         self.assertTrue(self.game.is_vertical_win_condition())
 
-        self.game.gameState = [['X', ' ', ' '], ['X', 'O', ' '],
-        ['X', 'O', ' ']]
+        self.game.gameState = [['X', ' ', ' '],
+                               ['X', 'O', ' '],
+                               ['X', 'O', ' ']]
 
         self.assertTrue(self.game.is_vertical_win_condition())
 
-        self.game.gameState = [[' ', 'X', 'O'], ['X', 'X', 'O'],
-        ['O', 'X', 'O']]
+        self.game.gameState = [[' ', 'X', 'O'],
+                               ['X', 'X', 'O'],
+                               ['O', 'X', 'O']]
 
         self.assertTrue(self.game.is_vertical_win_condition())
 
 
+    def test_is_horizontal_win_condition(self):
+        self.assertFalse(self.game.is_horizontal_win_condition())
+
+        self.game.gameState = [[' ', ' ', 'O'],
+                               ['O', 'X', 'X'],
+                               ['O', 'O', 'X']]
+
+        self.assertFalse(self.game.is_horizontal_win_condition())
+
+        self.game.gameState = [[' ', 'O', 'X'],
+                               ['X', 'O', 'X'],
+                               ['O', 'X', 'O']]
+
+        self.assertFalse(self.game.is_horizontal_win_condition())
+
+        self.game.gameState = [[' ', 'X', 'O'],
+                               ['X', 'X', '0'],
+                               ['O', 'X', 'O']]
+
+        self.assertFalse(self.game.is_horizontal_win_condition())
+
+        self.game.gameState = [['X', 'X', 'X'],
+                               ['O', 'O', 'X'],
+                               ['O', 'O', 'X']]
+
+        self.assertTrue(self.game.is_horizontal_win_condition())
+
+        self.game.gameState = [['X', 'O', 'X'],
+                               ['O', 'O', 'O'],
+                               ['X', ' ', 'X']]
+        self.game.turn = 'O'
+
+        self.assertTrue(self.game.is_horizontal_win_condition())
+
+        self.game.gameState = [['X', 'O', 'O'],
+                               [' ', 'O', ' '],
+                               ['X', 'X', 'X']]
+        self.game.turn = 'X'
+
+        self.assertTrue(self.game.is_horizontal_win_condition())
+
+        self.game.gameState = [[' ', 'X', 'O'],
+                               ['X', 'X', 'X'],
+                               ['O', 'O', 'O']]
+
+        self.assertTrue(self.game.is_horizontal_win_condition())
+
+    def test_is_diagonal_win_condition(self):
+        self.assertFalse(self.game.is_diagonal_win_condition())
+
+        self.game.gameState = [[' ', ' ', 'O'],
+                               ['O', 'X', 'X'],
+                               ['O', 'O', 'X']]
+
+        self.assertFalse(self.game.is_diagonal_win_condition())
+
+        self.game.gameState = [[' ', 'O', 'X'],
+                               ['X', 'O', 'X'],
+                               ['O', 'X', 'O']]
+
+        self.assertFalse(self.game.is_diagonal_win_condition())
+
+        self.game.gameState = [[' ', 'X', 'O'],
+                               ['X', 'X', '0'],
+                               ['O', 'X', 'O']]
+
+        self.assertFalse(self.game.is_diagonal_win_condition())
+
+        self.game.gameState = [['X', 'X', 'X'],
+                               ['O', 'X', 'O'],
+                               ['O', 'O', 'X']]
+
+        self.assertTrue(self.game.is_diagonal_win_condition())
+
+        self.game.gameState = [['O', 'X', 'X'],
+                               ['X', 'O', 'O'],
+                               ['X', ' ', 'O']]
+        self.game.turn = 'O'
+
+        self.assertTrue(self.game.is_diagonal_win_condition())
+
+        self.game.gameState = [['X', 'O', 'O'],
+                               [' ', 'X', ' '],
+                               ['X', 'O', 'X']]
+        self.game.turn = 'X'
+
+        self.assertTrue(self.game.is_diagonal_win_condition())
+
+        self.game.gameState = [['O', 'X', 'O'],
+                               ['X', 'O', 'X'],
+                               ['O', 'X', 'O']]
+        self.game.turn = 'O'
+
+        self.assertTrue(self.game.is_diagonal_win_condition())
 
 
 
