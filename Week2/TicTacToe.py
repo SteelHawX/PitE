@@ -116,11 +116,27 @@ class TicTacToeUI:
 
     def ask_for_coordinates(self):
         self.row = -1
-        while not self.game.is_coordinate_in_row_range(self.row):
-            self.row = int(input("Insert index of row (0 to 2)"))
+        while True:
+            try:
+                self.row = int(input("Insert index of row (0 to 2)"))
+            except ValueError:
+                print("You must insert an integer!")
+                continue
+
+            if self.game.is_coordinate_in_row_range(self.row):
+                break
+
         self.column = -1
-        while not self.game.is_coordinate_in_column_range(self.column):
-            self.column = int(input("Insert index of column (0 to 2)"))
+        while True:
+            try:
+                self.column = int(input("Insert index of column (0 to 2)"))
+            except ValueError:
+                print("You must insert an integer!")
+                continue
+
+            if self.game.is_coordinate_in_column_range(self.column):
+                break
+
         if not self.game.is_empty(self.row, self.column):
             print("This spot is already taken! Try different coordinates")
             self.ask_for_coordinates()
