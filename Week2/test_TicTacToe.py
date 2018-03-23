@@ -94,6 +94,7 @@ class TestTicTacToeGame(unittest.TestCase):
         pass
 
     def test_is_board_full(self):
+        # test boards that aren't full
         self.assertFalse(self.game.is_board_full())
 
         self.game.gameState = [['X', ' ', 'O'], [' ', ' ', ' '],
@@ -111,6 +112,7 @@ class TestTicTacToeGame(unittest.TestCase):
 
         self.assertFalse(self.game.is_board_full())
 
+        # test boards that are full
         self.game.gameState = [['X', 'X', 'O'], ['O', 'X', 'X'],
         ['O', 'O', 'X']]
 
@@ -129,6 +131,7 @@ class TestTicTacToeGame(unittest.TestCase):
         pass
 
     def test_is_vertical_win_condition(self):
+        # test not winning conditions
         self.assertFalse(self.game.is_vertical_win_condition())
 
         self.game.gameState = [[' ', ' ', 'O'],
@@ -149,6 +152,7 @@ class TestTicTacToeGame(unittest.TestCase):
 
         self.assertFalse(self.game.is_vertical_win_condition())
 
+        # test winning conditions
         self.game.gameState = [['X', 'X', 'X'],
                                ['O', 'O', 'X'],
                                ['O', 'O', 'X']]
@@ -177,6 +181,7 @@ class TestTicTacToeGame(unittest.TestCase):
 
 
     def test_is_horizontal_win_condition(self):
+        # test not winning conditions
         self.assertFalse(self.game.is_horizontal_win_condition())
 
         self.game.gameState = [[' ', ' ', 'O'],
@@ -197,6 +202,7 @@ class TestTicTacToeGame(unittest.TestCase):
 
         self.assertFalse(self.game.is_horizontal_win_condition())
 
+        # test winning conditions
         self.game.gameState = [['X', 'X', 'X'],
                                ['O', 'O', 'X'],
                                ['O', 'O', 'X']]
@@ -226,6 +232,7 @@ class TestTicTacToeGame(unittest.TestCase):
         pass
 
     def test_is_diagonal_win_condition(self):
+        # test not winning conditions
         self.assertFalse(self.game.is_diagonal_win_condition())
 
         self.game.gameState = [[' ', ' ', 'O'],
@@ -250,6 +257,7 @@ class TestTicTacToeGame(unittest.TestCase):
                                ['O', 'X', 'O'],
                                ['O', 'O', 'X']]
 
+        # test winning conditions
         self.assertTrue(self.game.is_diagonal_win_condition())
 
         self.game.gameState = [['O', 'X', 'X'],
