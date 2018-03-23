@@ -341,7 +341,29 @@ class TestTicTacToeUI(unittest.TestCase):
 
         pass
 
+    def test_is_game_finished(self):
+        #test finished games
+        self.UI.game.is_board_full = MagicMock(return_value=True)
+        self.UI.game.has_player_won = MagicMock(return_value=False)
 
+        self.assertTrue(self.UI.is_game_finished(testing=True))
+
+        self.UI.game.is_board_full = MagicMock(return_value=False)
+        self.UI.game.has_player_won = MagicMock(return_value=True)
+
+        self.assertTrue(self.UI.is_game_finished(testing=True))
+
+        self.UI.game.is_board_full = MagicMock(return_value=True)
+        self.UI.game.has_player_won = MagicMock(return_value=True)
+
+        self.assertTrue(self.UI.is_game_finished(testing=True))
+
+        # test unfinished games
+
+        self.UI.game.is_board_full = MagicMock(return_value=False)
+        self.UI.game.has_player_won = MagicMock(return_value=False)
+
+        self.assertFalse(self.UI.is_game_finished(testing=True))
 
 if __name__ == "__main__":
     unittest.main()
