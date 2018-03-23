@@ -120,9 +120,9 @@ class TicTacToeUI:
             try:
                 self.row = int(self.ask_user_for_row())
             except ValueError:
-                print("You must insert an integer!")
                 if testing:
                     raise ValueError
+                print("You must insert an integer!")
                 continue
 
             if self.game.is_coordinate_in_row_range(self.row):
@@ -136,9 +136,9 @@ class TicTacToeUI:
             try:
                 self.column = int(self.ask_user_for_column())
             except ValueError:
-                print("You must insert an integer!")
                 if testing:
                     raise ValueError
+                print("You must insert an integer!")
                 continue
 
             if self.game.is_coordinate_in_column_range(self.column):
@@ -153,13 +153,17 @@ class TicTacToeUI:
     def insert_value(self):
         self.game.insert_value(self.row, self.column)
 
-    def is_game_finished(self):
-        self.draw_game()
+    def is_game_finished(self, testing=False):
+        if not testing:
+            self.draw_game()
+
         if self.game.is_board_full():
-            print("Game ends with a draw!")
+            if not testing:
+                print("Game ends with a draw!")
             return True
         elif self.game.has_player_won():
-            print("%s won the game!" % self.game.turn)
+            if not testing:
+                print("%s won the game!" % self.game.turn)
             return True
         else:
             return False
