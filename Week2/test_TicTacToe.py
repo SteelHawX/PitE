@@ -286,12 +286,26 @@ class TestTicTacToeUI(unittest.TestCase):
         pass
 
     def test_ask_for_coordinates(self):
+        # test proper inputs
         self.UI.ask_user_for_row = MagicMock(return_value=0)
         self.UI.ask_user_for_column = MagicMock(return_value=0)
         self.UI.ask_for_coordinates()
         self.assertEqual(self.UI.row, 0)
         self.assertEqual(self.UI.column, 0)
 
+        self.UI.ask_user_for_row = MagicMock(return_value=2)
+        self.UI.ask_user_for_column = MagicMock(return_value=1)
+        self.UI.ask_for_coordinates()
+        self.assertEqual(self.UI.row, 2)
+        self.assertEqual(self.UI.column, 1)
+
+        self.UI.ask_user_for_row = MagicMock(return_value="2")
+        self.UI.ask_user_for_column = MagicMock(return_value="1")
+        self.UI.ask_for_coordinates()
+        self.assertEqual(self.UI.row, 2)
+        self.assertEqual(self.UI.column, 1)
+
+        # test string that are no numbers inputs
         self.UI.ask_user_for_row = MagicMock(return_value="")
 
         with self.assertRaises(ValueError):
@@ -299,9 +313,11 @@ class TestTicTacToeUI(unittest.TestCase):
 
         self.UI.ask_user_for_row = MagicMock(return_value=1)
         self.UI.ask_user_for_column = MagicMock(return_value="ds")
+
         with self.assertRaises(ValueError):
             self.UI.ask_for_coordinates(testing=True)
 
+        # test integers that are out of range input
         self.UI.ask_user_for_row = MagicMock(return_value=4)
         self.UI.ask_user_for_column = MagicMock(return_value=1)
 
