@@ -112,31 +112,40 @@ class TicTacToeUI:
             print('---------')
 
     def print_whose_turn(self):
-        print('Now is a player %s has a turn' % self.game.turn)
+        print("Now is a player %s has a turn" % self.game.turn)
 
-    def ask_for_coordinates(self):
+    def ask_for_coordinates(self, testing=False):
         self.row = -1
         while True:
             try:
-                self.row = int(input("Insert index of row (0 to 2)"))
+                self.row = int(self.ask_user_for_row())
             except ValueError:
                 print("You must insert an integer!")
+                if testing:
+                    raise ValueError
                 continue
 
             if self.game.is_coordinate_in_row_range(self.row):
+                break
+            elif testing:
+                raise IndexError
                 break
 
         self.column = -1
         while True:
             try:
-                self.column = int(input("Insert index of column (0 to 2)"))
+                self.column = int(self.ask_user_for_column())
             except ValueError:
                 print("You must insert an integer!")
+                if testing:
+                    raise ValueError
                 continue
 
             if self.game.is_coordinate_in_column_range(self.column):
                 break
-
+            elif testing:
+                raise IndexError
+                break
         if not self.game.is_empty(self.row, self.column):
             print("This spot is already taken! Try different coordinates")
             self.ask_for_coordinates()
@@ -165,6 +174,13 @@ class TicTacToeUI:
             self.print_whose_turn()
             self.ask_for_coordinates()
             self.insert_value()
+
+    def ask_user_for_row(self):
+        return input("Insert index of row (0 to 2)")
+
+    def ask_user_for_column(self):
+        return input("Insert index of column (0 to 2)")
+
 
 if __name__ == "__main__":
     TicTacToeUI().run()
