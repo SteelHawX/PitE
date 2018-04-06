@@ -1,6 +1,6 @@
 import socket
 import pickle
-
+import TicTacToe
 
 # instances of this class registers number of clients and can send or receive data from them one at
 # the time and alter between them
@@ -30,10 +30,10 @@ class Server:
     # waits for data send by current client
     def receive(self):
         while 1:
-            byte_data = self.client_info[self.current_client][1].recv(self.buffer_size)
-            if not byte_data:
+            self.s = self.client_info[self.current_client][1].recv(self.buffer_size)
+            if not self.s:
                 break
-            data = pickle.loads(byte_data)
+            data = pickle.loads(self.s)
             return data
 
     # sends data to current client
@@ -50,3 +50,15 @@ class Server:
         for conn in self.client_info:
             conn[1].close()
 
+
+if __name__ == '__main__':
+    s = Server()
+    s.wait_for_clients()
+    s.s = s.receive()
+
+    s.send("Welcome, you connected as first")
+    s.next_client()
+    s.send("Welcome, you connected as second")
+    gameUI = TicTacToe.TicTacToeUI(s)
+    gameUI.run()
+    s.close()
