@@ -1,3 +1,7 @@
+#First look:
+#that is a lot of code. sometimes more code = clearer code, but this isn't really that clear
+
+
 """Implements game logic"""
 class TicTacToeGame:
     def __init__(self):
@@ -61,7 +65,9 @@ class TicTacToeGame:
             if win is True:
                 return True
         return False
-
+    # 3 last lines can be replaced with "return win"
+    
+    
     """Checks all horizontal possibilities of winning the game. Win flag is true at the beginning of the check of each
     row and changes to false only if finds "wrong" symbol(that does not belong to player that has a turn)"""
     def is_horizontal_win_condition(self):
@@ -73,7 +79,8 @@ class TicTacToeGame:
             if win is True:
                 return True
         return False
-
+    #3 last lines can be replaced with "return True"
+    
     """Checks both diagonal possibilities of winning the game. Implementation analogical to those two above"""
     def is_diagonal_win_condition(self):
         win = True
@@ -88,11 +95,16 @@ class TicTacToeGame:
                 win = False
         if win is True:
             return True
-
+    #same as last 2 functions
+        
     """Checks if any of win conditions is fulfilled"""
     def has_player_won(self):
         return self.is_horizontal_win_condition() or self.is_vertical_win_condition() or self.is_diagonal_win_condition()
 
+#Logic review:
+#Code is convoluted, some functions could be simplified. The information on whose turn is it, as well as saving date after
+#move is done in a clever way, that makes checking win conditions harder, and less clear. 
+    
 """Implements User Interface"""
 class TicTacToeUI:
     def __init__(self):
@@ -188,3 +200,8 @@ class TicTacToeUI:
 
 if __name__ == "__main__":
     TicTacToeUI().run()
+
+#General    
+#The game itself is pretty flawed. Board always draws itself twice for some reason. Gramatical errors in communication with user.
+#Functions names are pretty descriptive and there is good documentation for most of them. 
+#Classes seem to divide project well.
