@@ -113,6 +113,25 @@ class TicTacToeUI(guib.GameUIBase):
         self._game_state = 0
         self._game_state_cycle_size = 4
 
+    @staticmethod
+    def name():
+        return "TicTacToe"
+
+    @staticmethod
+    def players():
+        return 2
+
+    @staticmethod
+    def string_to_input(string):
+        return tuple(map(int, string.split(", ")))
+
+    def string_is_valid(self, string):
+        for substring in string.split(", "):
+            if not substring.isdigit():
+                self._game_state = 2
+                return False
+        return True
+
     def initial_message(self):
         output = "I welcome you to the tic tac toe game.\n\n"
         output += self._draw_board()
@@ -168,15 +187,15 @@ class TicTacToeUI(guib.GameUIBase):
 
     def next_turn(self):
         self._game.end_players_turn()
-        self._game_state = 1
+        self._game_state = 3
         return self._game.turn
 
     def is_finished(self):
-        if self._game.is_board_full() is True:
-            self._game_state = 4
-            return True
-        elif self._game.has_player_won():
+        if self._game.has_player_won():
             self._game_state = 5
+            return True
+        elif self._game.is_board_full() is True:
+            self._game_state = 4
             return True
         else:
             return False
@@ -188,7 +207,7 @@ def run_the_game():
     game_in_progress = True
     while game_in_progress:
         raw_input = input(ttt.state_of_the_game())
-        true_input = tuple(map(int, raw_input.split(", ")))
+        true_input = ttt.string_to_input(raw_input)
         while ttt.input_values_valid(true_input) is False:
             raw_input = input(ttt.state_of_the_game())
             true_input = tuple(map(int, raw_input.split(", ")))
@@ -200,4 +219,4 @@ def run_the_game():
         ttt.next_turn()
 
 
-run_the_game()
+#run_the_game()

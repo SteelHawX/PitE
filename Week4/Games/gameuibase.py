@@ -4,6 +4,21 @@ from abc import abstractmethod
 
 class GameUIBase(ABC):
 
+    @staticmethod
+    @abstractmethod
+    def name():
+        pass
+
+    @staticmethod
+    @abstractmethod
+    def players():
+        pass
+
+    @staticmethod
+    @abstractmethod
+    def string_to_input(string):
+        pass
+
     @abstractmethod
     def initial_message(self):
         return ""
