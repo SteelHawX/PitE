@@ -44,6 +44,14 @@ class GuessingGameUI(guib.GameUIBase):
         # 5 - player lost
         self._game_state = 0
 
+    @staticmethod
+    def name():
+        return "Simple game of guessing"
+
+    @staticmethod
+    def players():
+        return 1
+
     def initial_message(self):
         output = "I welcome you to guessing game.\n Computer drew a number, try to guess it!\n\n"
         self._game_state = 1
@@ -71,6 +79,17 @@ class GuessingGameUI(guib.GameUIBase):
             raise ValueError
         return output
 
+    @staticmethod
+    def string_to_input(string):
+        return int(string)
+
+    def string_is_valid(self, string):
+        if string.isdigit():
+            return True
+        else:
+            self._game_state = 2
+            return False
+
     def input_values_valid(self, input_values):
         if input_values in range(1, 101):
             return True
@@ -84,6 +103,7 @@ class GuessingGameUI(guib.GameUIBase):
 
     def next_turn(self):
         self._game_state = 1
+
     def is_finished(self):
         if self._game.has_player_won():
             self._game_state = 4

@@ -20,6 +20,10 @@ class GameUIBase(ABC):
         pass
 
     @abstractmethod
+    def string_is_valid(self, string):
+        pass
+
+    @abstractmethod
     def initial_message(self):
         return ""
 

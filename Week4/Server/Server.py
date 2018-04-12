@@ -4,6 +4,7 @@ import sys
 sys.path.append('../Helpers')
 sys.path.append('../Games')
 from TicTacToe import TicTacToeUI
+from Guessing import GuessingGameUI
 from Message import Message
 from Message import StateFlag
 from Wrapper import Wrapper
@@ -88,7 +89,7 @@ class Lobby:
         self.client_info = list()
         self.s = sock
         self.buffer_size = 1024
-        self.games = [TicTacToeUI()]
+        self.games = [TicTacToeUI(), GuessingGameUI()]
         self.game_rooms = list()
         self.s.listen(1)
 
