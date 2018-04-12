@@ -1,12 +1,14 @@
 from enum import Enum
 
-class MessageType(Enum):
-    coordinate_question = 0
-    game_board = 1
-    info = 2
-    game_ending_result = 3
+class StateFlag(Enum):
+    server_waiting_for_response = 0
+    server_received_invalid_response = 1
+    server_received_valid_response = 2
+    server_didnt_receive_response = 3
+    server_send_info = 4
+    server_end_connection = 5
 
 class Message:
-    def __init__(self, type, data):
-        self.type = type
+    def __init__(self, header, data):
+        self.header = header
         self.data = data
