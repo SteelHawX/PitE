@@ -6,11 +6,13 @@ import ClientService
 
 
 class MessageHandler(object):
-    def __init__(self, socket):
+    def __init__(self, socket, buffer_size):
         self.socket = socket
         self.response_data = ""
+        self.buffer_size = buffer_size
 
-    def handle(self, message):
+    def handle(self):
+        message = self.receive()
         if not isinstance(message, Message):
             print(type(message))
             print("message is not of type Message")
@@ -36,4 +38,13 @@ class MessageHandler(object):
         response_data = Message(0, self.response_data)
         data = Wrapper.wrap(response_data)
         self.socket.send(data)
+
+    # waits for data send from the server
+    def receive(self):
+        while 1:
+            data = self.socket.recv(self.buffer_size)
+            if not data:
+                break
+            mess = Wrapper.unwrap(data)
+            return mess
 
