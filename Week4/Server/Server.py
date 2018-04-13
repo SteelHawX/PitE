@@ -35,7 +35,7 @@ class Room:
             self.start_game()
 
     def _send(self, message, flag):
-        info_message = Message(flag, message)
+        info_message = Message(StateFlag(flag), message)
         self.players_info[self.current_player][1].send(Wrapper.wrap(info_message))
 
     def _listen(self):
