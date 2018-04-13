@@ -4,34 +4,36 @@ from enum import Enum
 from Wrapper import Wrapper
 import ClientService
 
+
 class MessageHandler(object):
     def __init__(self, socket):
-        self.response_data = ""
         self.socket = socket
-
+        self.response_data = ""
 
     def handle(self, message):
-        if message is not Message:
+        if not isinstance(message, Message):
+            print(type(message))
             print("message is not of type Message")
             raise TypeError
 
-        if message.header == StateFlag.server_received_valid_response or message.header ==  StateFlag.server_send_info:
+        if message.header is StateFlag.server_received_valid_response or message.header is  StateFlag.server_send_info:
             ClientService.show_info(message.data)
-        elif message.header == StateFlag.server_end_connection:
+        elif message.header is StateFlag.server_end_connection:
             ClientService.show_info(message.data)
             #end game
-            return False
-        elif message.header == StateFlag.server_waiting_for_response or message.header == StateFlag.server_received_invalid_response:
+            return True
+        elif message.header is StateFlag.server_waiting_for_response or message.header is StateFlag.server_received_invalid_response:
             self.response_data = ClientService.ask_user_for_input(message.data)
             self.respond_server()
-        elif message.header == StateFlag.server_didnt_receive_response:
+        elif message.header is StateFlag.server_didnt_receive_response:
             self.respond_server()
 
 
         #continue game
-        return True
+        return False
 
     def respond_server(self):
-        data = Wrapper.wrap(self.response_data)
+        response_data = Message(0, self.response_data)
+        data = Wrapper.wrap(response_data)
         self.socket.send(data)
 
