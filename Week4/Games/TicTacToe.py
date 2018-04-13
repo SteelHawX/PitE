@@ -206,11 +206,11 @@ def run_the_game():
     print(ttt.initial_message())
     game_in_progress = True
     while game_in_progress:
-        raw_input = input(ttt.state_of_the_game())
-        true_input = ttt.string_to_input(raw_input)
-        while ttt.input_values_valid(true_input) is False:
+        while True:
             raw_input = input(ttt.state_of_the_game())
             true_input = tuple(map(int, raw_input.split(", ")))
+            if ttt.input_values_valid(true_input):
+                break
         ttt.insert_values(true_input)
         print(ttt.state_of_the_game())
         if ttt.is_finished() is True:
