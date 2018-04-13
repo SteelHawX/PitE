@@ -167,7 +167,15 @@ class Server:
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.bind((self.tcp_ip, self.tcp_port))
         self.lobby = Lobby(self.s)
+    
+
+    def run(self):
         self.lobby.run()
 
-
-Server()
+if __name__ == '__main__':
+    s = Server()
+    try:
+        s.run()
+    except KeyboardInterrupt:
+        s.s.close()
+        sys.exit(0)
