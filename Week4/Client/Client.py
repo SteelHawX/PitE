@@ -31,12 +31,10 @@ class Client:
     def receive(self):
         while 1:
             data = self.s.recv(self.buffer_size)
-
             if not data:
                 break
             return data
 
-        return data
     # closes socket
     def close(self):
         self.s.close()
