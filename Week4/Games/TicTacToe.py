@@ -218,5 +218,5 @@ def run_the_game():
             game_in_progress = False
         ttt.next_turn()
 
-
-#run_the_game()
+if __name__ == '__main__':
+    run_the_game()
