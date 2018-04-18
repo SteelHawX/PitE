@@ -14,6 +14,9 @@ class GuessingGame:
     """Save user guess"""
     def insert_value(self, guess):
         self.guess = guess
+
+    """Increments number of guesses value"""
+    def increase_number_of_guesses(self):
         self.number_of_guesses += 1
 
     """Check if player won game"""
@@ -99,6 +102,7 @@ class GuessingGameUI(guib.GameUIBase):
 
     def insert_values(self, input_values):
         self._game.insert_value(input_values)
+        self._game.increase_number_of_guesses()
         self._game_state = 3
 
     def next_turn(self):
