@@ -94,6 +94,78 @@ class TestGuessingGame(unittest.TestCase):
         self.assertFalse(self.game.can_player_guess_again())
 
 
+    def test_is_guess_smaller(self):
+        self.assertTrue(self.game.is_guess_smaller())
+        
+        self.game.number = 1
+        self.game.guess = 50
+        self.assertFalse(self.game.is_guess_smaller())
+        self.game.number = 1
+        self.game.guess = 20
+        self.assertFalse(self.game.is_guess_smaller())
+        self.game.number = 75
+        self.game.guess = 75
+        self.assertFalse(self.game.is_guess_smaller())
+        self.game.number = 75
+        self.game.guess = 100
+        self.assertFalse(self.game.is_guess_smaller())
+        self.game.number = 100
+        self.game.guess = 100
+        self.assertFalse(self.game.is_guess_smaller())
 
+        self.game.number = 100
+        self.game.guess = 20
+        self.assertTrue(self.game.is_guess_smaller())
+        self.game.number = 100
+        self.game.guess = 90
+        self.assertTrue(self.game.is_guess_smaller())
+        self.game.number = 100
+        self.game.guess = 47
+        self.assertTrue(self.game.is_guess_smaller())
+        self.game.number = 30
+        self.game.guess = 13
+        self.assertTrue(self.game.is_guess_smaller())
+        self.game.number = 30
+        self.game.guess = 29
+        self.assertTrue(self.game.is_guess_smaller())
+
+
+    def test_is_guess_bigger(self):
+        self.assertFalse(self.game.is_guess_bigger())
+
+        self.game.guess = 1
+        self.game.number = 1
+        self.assertFalse(self.game.is_guess_bigger())
+        self.game.guess = 53
+        self.game.number = 54
+        self.assertFalse(self.game.is_guess_bigger())
+        self.game.guess = 53
+        self.game.number = 84
+        self.assertFalse(self.game.is_guess_bigger())
+        self.game.guess = 100
+        self.game.number = 100
+        self.assertFalse(self.game.is_guess_bigger())
+        self.game.guess = 97
+        self.game.number = 100
+        self.assertFalse(self.game.is_guess_bigger())
+
+        self.game.guess = 100
+        self.game.number = 99
+        self.assertTrue(self.game.is_guess_bigger())
+        self.game.guess = 100
+        self.game.number = 74
+        self.assertTrue(self.game.is_guess_bigger())
+        self.game.guess = 2
+        self.game.number = 1
+        self.assertTrue(self.game.is_guess_bigger())
+        self.game.guess = 35
+        self.game.number = 31
+        self.assertTrue(self.game.is_guess_bigger())
+        self.game.guess = 87
+        self.game.number = 86
+        self.assertTrue(self.game.is_guess_bigger())
+
+        
 if __name__ == "__main__":
     unittest.main()
+    
