@@ -1,4 +1,6 @@
 import unittest
+import sys
+sys.path.append("../Games")
 from unittest.mock import MagicMock
 from TicTacToe import TicTacToeGame
 from TicTacToe import TicTacToeUI
@@ -288,8 +290,8 @@ class TestTicTacToeUI(unittest.TestCase):
         self.UI = TicTacToeUI()
 
     def test_init(self):
-        self.assertEqual(self.UI.row, -1)
-        self.assertEqual(self.UI.column, -1)
+        self.assertEqual(self.UI._row, -1)
+        self.assertEqual(self.UI._column, -1)
 
         pass
 
@@ -298,77 +300,6 @@ class TestTicTacToeUI(unittest.TestCase):
 
         pass
 
-    def test_ask_for_coordinates(self):
-        # test proper inputs
-        self.UI.ask_user_for_row = MagicMock(return_value=0)
-        self.UI.ask_user_for_column = MagicMock(return_value=0)
-        self.UI.ask_for_coordinates()
-        self.assertEqual(self.UI.row, 0)
-        self.assertEqual(self.UI.column, 0)
-
-        self.UI.ask_user_for_row = MagicMock(return_value=2)
-        self.UI.ask_user_for_column = MagicMock(return_value=1)
-        self.UI.ask_for_coordinates()
-        self.assertEqual(self.UI.row, 2)
-        self.assertEqual(self.UI.column, 1)
-
-        self.UI.ask_user_for_row = MagicMock(return_value="2")
-        self.UI.ask_user_for_column = MagicMock(return_value="1")
-        self.UI.ask_for_coordinates()
-        self.assertEqual(self.UI.row, 2)
-        self.assertEqual(self.UI.column, 1)
-
-        # test string that are no numbers inputs
-        self.UI.ask_user_for_row = MagicMock(return_value="")
-
-        with self.assertRaises(ValueError):
-            self.UI.ask_for_coordinates(testing=True)
-
-        self.UI.ask_user_for_row = MagicMock(return_value=1)
-        self.UI.ask_user_for_column = MagicMock(return_value="ds")
-
-        with self.assertRaises(ValueError):
-            self.UI.ask_for_coordinates(testing=True)
-
-        # test integers that are out of range input
-        self.UI.ask_user_for_row = MagicMock(return_value=4)
-        self.UI.ask_user_for_column = MagicMock(return_value=1)
-
-        with self.assertRaises(IndexError):
-            self.UI.ask_for_coordinates(testing=True)
-
-        self.UI.ask_user_for_row = MagicMock(return_value=2)
-        self.UI.ask_user_for_column = MagicMock(return_value=-1)
-
-        with self.assertRaises(IndexError):
-            self.UI.ask_for_coordinates(testing=True)
-
-
-        pass
-
-    def test_is_game_finished(self):
-        #test finished games
-        self.UI.game.is_board_full = MagicMock(return_value=True)
-        self.UI.game.has_player_won = MagicMock(return_value=False)
-
-        self.assertTrue(self.UI.is_game_finished(testing=True))
-
-        self.UI.game.is_board_full = MagicMock(return_value=False)
-        self.UI.game.has_player_won = MagicMock(return_value=True)
-
-        self.assertTrue(self.UI.is_game_finished(testing=True))
-
-        self.UI.game.is_board_full = MagicMock(return_value=True)
-        self.UI.game.has_player_won = MagicMock(return_value=True)
-
-        self.assertTrue(self.UI.is_game_finished(testing=True))
-
-        # test unfinished games
-
-        self.UI.game.is_board_full = MagicMock(return_value=False)
-        self.UI.game.has_player_won = MagicMock(return_value=False)
-
-        self.assertFalse(self.UI.is_game_finished(testing=True))
 
 if __name__ == "__main__":
     unittest.main()
