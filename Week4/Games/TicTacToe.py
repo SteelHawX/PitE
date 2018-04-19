@@ -126,6 +126,9 @@ class TicTacToeUI(guib.GameUIBase):
         return tuple(map(int, string.split(", ")))
 
     def string_is_valid(self, string):
+        if string.count(", ") != 1:
+            return False
+
         for substring in string.split(", "):
             if not substring.isdecimal():
                 self._game_state = 2
