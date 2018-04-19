@@ -44,5 +44,56 @@ class TestGuessingGame(unittest.TestCase):
 
         pass
 
+
+    def test_has_player_won(self):
+        self.game.number = 1
+        self.game.guess = 2
+        self.assertFalse(self.game.has_player_won())
+        self.game.guess = 100
+        self.assertFalse(self.game.has_player_won())
+        self.game.guess = 35
+        self.assertFalse(self.game.has_player_won())
+        self.game.guess = 1
+        self.assertTrue(self.game.has_player_won())
+
+        self.game.number = 100
+        self.game.guess = 99
+        self.assertFalse(self.game.has_player_won())
+        self.game.guess = 1
+        self.assertFalse(self.game.has_player_won())
+        self.game.guess = 78
+        self.assertFalse(self.game.has_player_won())
+        self.game.guess = 100
+        self.assertTrue(self.game.has_player_won())
+
+        self.game.number = 57
+        self.game.guess = 56
+        self.assertFalse(self.game.has_player_won())
+        self.game.guess = 89
+        self.assertFalse(self.game.has_player_won())
+        self.game.guess = 24
+        self.assertFalse(self.game.has_player_won())
+        self.game.guess = 57
+        self.assertTrue(self.game.has_player_won())
+
+        pass
+
+    def test_can_player_guess_again(self):
+        self.assertTrue(self.game.can_player_guess_again())
+
+        self.game.number_of_guesses = GuessingGame.maximum_number_of_guesses - 11
+        self.assertTrue(self.game.can_player_guess_again())
+
+        self.game.number_of_guesses = GuessingGame.maximum_number_of_guesses - 4
+        self.assertTrue(self.game.can_player_guess_again())
+
+        self.game.number_of_guesses = GuessingGame.maximum_number_of_guesses - 1
+        self.assertTrue(self.game.can_player_guess_again())
+
+        self.game.number_of_guesses = GuessingGame.maximum_number_of_guesses
+        self.assertFalse(self.game.can_player_guess_again())
+
+
+
 if __name__ == "__main__":
     unittest.main()
