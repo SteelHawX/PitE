@@ -1,7 +1,8 @@
 language: python
 python:
- - "3.6"
+    - "3.6"
 install:
- - pip install -r requirements.txt
- script:
-  - python3 test_Guessing.py
+    - pip install -r requirements.txt
+script:
+    - cd Week4/Tests
+    - python -m unittest discover .
