@@ -165,7 +165,22 @@ class TestGuessingGame(unittest.TestCase):
         self.game.number = 86
         self.assertTrue(self.game.is_guess_bigger())
 
-        
+        pass
+
+class TestGuessingGameUI(unittest.TestCase):
+    def setUp(self):
+        self.UI = GuessingGameUI()
+
+    def test_init(self):
+        self.assertEqual(self.UI._game_state, 0)
+
+        pass
+
+    def test_players(self):
+        self.assertEqual(self.UI.players(), 1)
+
+        pass
+    
+
 if __name__ == "__main__":
     unittest.main()
-    
