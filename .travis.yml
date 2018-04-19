@@ -5,4 +5,4 @@ install:
     - pip install -r requirements.txt
 script:
     - cd Week4/Tests
-    - python -m unnittest discover .
+    - python -m unittest discover .
