@@ -4,4 +4,4 @@ python:
 install:
  - pip install -r requirements.txt
  script:
-  - python test_Guessing.py
+  - python3 test_Guessing.py
