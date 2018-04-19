@@ -3,11 +3,13 @@ from copy import copy
 import sys
 sys.path.append('../Helpers')
 sys.path.append('../Games')
+sys.path.append('../Exceptions')
 from TicTacToe import TicTacToeUI
 from Guessing import GuessingGameUI
 from Message import Message
 from Message import StateFlag
 from Wrapper import Wrapper
+import ServerExceptions as se
 
 
 # play room; handles game - client communication
@@ -24,6 +26,8 @@ class Room:
     def has_empty_slots(self):
         if self.players_connected < self.max_players:
             return True
+        elif self.players_connected > self.max_players:
+            raise se.TooManyPlayersError(self.players_connected, "Too many players in the room!")
         else:
             return False
 
@@ -156,7 +160,6 @@ class Lobby:
             self.game_rooms[-1].add_player(self.client_info[-1])
 
 
-
 # server
 class Server:
 
@@ -167,10 +170,10 @@ class Server:
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.s.bind((self.tcp_ip, self.tcp_port))
         self.lobby = Lobby(self.s)
-    
 
     def run(self):
         self.lobby.run()
+
 
 if __name__ == '__main__':
     s = Server()
