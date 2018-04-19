@@ -343,7 +343,6 @@ class TestTicTacToeUI(unittest.TestCase):
         with self.assertRaises(IndexError):
             self.UI.ask_for_coordinates(testing=True)
 
-
         pass
 
     def test_is_game_finished(self):
