@@ -293,6 +293,11 @@ class TestTicTacToeUI(unittest.TestCase):
 
         pass
 
+    def test_players(self):
+        self.assertEqual(self.UI.players(), 2)
+
+        pass
+
     def test_ask_for_coordinates(self):
         # test proper inputs
         self.UI.ask_user_for_row = MagicMock(return_value=0)
