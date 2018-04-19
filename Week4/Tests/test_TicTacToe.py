@@ -300,6 +300,23 @@ class TestTicTacToeUI(unittest.TestCase):
 
         pass
 
+    def test_string_is_valid(self):
+        self.assertTrue(self.UI.string_is_valid("0, 81923"))
+        self.assertTrue(self.UI.string_is_valid("131, 8"))
+        self.assertTrue(self.UI.string_is_valid("2400, 73"))
+
+        self.assertFalse(self.UI.string_is_valid("-1, 813"))
+        self.assertFalse(self.UI.string_is_valid(", 8"))
+        self.assertFalse(self.UI.string_is_valid(".12, 73"))
+        self.assertFalse(self.UI.string_is_valid("24^, 2"))
+        self.assertFalse(self.UI.string_is_valid("dsd, 8"))
+        self.assertFalse(self.UI.string_is_valid("2400"))
+        self.assertFalse(self.UI.string_is_valid("24,00"))
+        self.assertFalse(self.UI.string_is_valid("24, 50, 23"))
+        self.assertFalse(self.UI.string_is_valid("24, 50,23"))
+
+        pass
+
 
 if __name__ == "__main__":
     unittest.main()
