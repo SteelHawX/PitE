@@ -23,9 +23,9 @@ class GuessingGame:
     def has_player_won(self):
         return self.guess == self.number
 
-    """Check if player lost game"""
-    def has_player_lost(self):
-        return self.number_of_guesses > GuessingGame.maximum_number_of_guesses
+    """Check if player can guess again"""
+    def can_player_guess_again(self):
+        return self.number_of_guesses < GuessingGame.maximum_number_of_guesses
 
     """Check if guessed number is smaller than the actual number"""
     def is_guess_smaller(self):
@@ -112,7 +112,7 @@ class GuessingGameUI(guib.GameUIBase):
         if self._game.has_player_won():
             self._game_state = 4
             return  True
-        elif self._game.has_player_lost():
+        elif not self._game.can_player_guess_again():
             self._game_state = 5
             return True
         else:
