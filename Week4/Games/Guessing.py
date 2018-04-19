@@ -87,7 +87,7 @@ class GuessingGameUI(guib.GameUIBase):
         return int(string)
 
     def string_is_valid(self, string):
-        if string.isdigit():
+        if string.isdecimal():
             return True
         else:
             self._game_state = 2

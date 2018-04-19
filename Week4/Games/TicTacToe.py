@@ -127,7 +127,7 @@ class TicTacToeUI(guib.GameUIBase):
 
     def string_is_valid(self, string):
         for substring in string.split(", "):
-            if not substring.isdigit():
+            if not substring.isdecimal():
                 self._game_state = 2
                 return False
         return True
