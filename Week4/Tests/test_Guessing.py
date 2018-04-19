@@ -177,10 +177,51 @@ class TestGuessingGameUI(unittest.TestCase):
         pass
 
     def test_players(self):
-        self.assertEqual(self.UI.players(), 1)
+        self.assertEqual(GuessingGameUI.players(), 1)
 
         pass
-    
+
+    def test_string_to_input(self):
+        self.assertEqual(GuessingGameUI.string_to_input("-15"), -15)
+        self.assertEqual(GuessingGameUI.string_to_input("97"), 97)
+        self.assertEqual(GuessingGameUI.string_to_input("123131413343424"), 123131413343424)
+
+
+        pass
+
+    def test_string_is_valid(self):
+        self.assertTrue(self.UI.string_is_valid("57"))
+        self.assertTrue(self.UI.string_is_valid("0"))
+        self.assertTrue(self.UI.string_is_valid("9482423829"))
+
+
+        self.assertFalse(self.UI.string_is_valid("-1"))
+        self.assertFalse(self.UI.string_is_valid("-12&"))
+        self.assertFalse(self.UI.string_is_valid("2%54"))
+        self.assertFalse(self.UI.string_is_valid(""))
+        self.assertFalse(self.UI.string_is_valid("s4a"))
+        self.assertFalse(self.UI.string_is_valid("sad"))
+        self.assertFalse(self.UI.string_is_valid("\u00B2"))
+
+        pass
+
+    def test_input_values_valid(self):
+        self.assertTrue(self.UI.input_values_valid(1))
+        self.assertTrue(self.UI.input_values_valid(100))
+        self.assertTrue(self.UI.input_values_valid(84))
+        self.assertTrue(self.UI.input_values_valid(23))
+
+
+        self.assertFalse(self.UI.input_values_valid(101))
+        self.assertFalse(self.UI.input_values_valid(0))
+        self.assertFalse(self.UI.input_values_valid(500231))
+
+        pass
+
+
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
