@@ -358,6 +358,49 @@ class TestTicTacToeUI(unittest.TestCase):
         pass
 
 
+    def test_insert_value(self):
+        self.UI.insert_values((0, 0))
+        self.assertEqual(self.UI._game.turn, self.UI._game.gameState[0][0])
+        self.UI.insert_values((2, 2))
+        self.assertEqual(self.UI._game.turn, self.UI._game.gameState[2][2])
+        self.UI.insert_values((2, 1))
+        self.assertEqual(self.UI._game.turn, self.UI._game.gameState[2][1])
+        self.UI.insert_values((0, 2))
+        self.assertEqual(self.UI._game.turn, self.UI._game.gameState[0][2])
+        self.UI.insert_values((1, 1))
+        self.assertEqual(self.UI._game.turn, self.UI._game.gameState[1][1])
+
+        pass
+
+    def test_next_turn(self):
+        self.assertEqual('O', self.UI.next_turn())
+        self.assertEqual('X', self.UI.next_turn())
+
+        pass
+
+    def test_is_finished(self):
+        self.UI._game.has_player_won = MagicMock(return_value=True)
+        self.UI._game.is_board_full = MagicMock(return_value=True)
+
+        self.assertTrue(self.UI.is_finished())
+
+        self.UI._game.has_player_won = MagicMock(return_value=False)
+
+        self.assertTrue(self.UI.is_finished())
+
+        self.UI._game.has_player_won = MagicMock(return_value=True)
+        self.UI._game.is_board_full = MagicMock(return_value=False)
+
+        self.assertTrue(self.UI.is_finished())
+
+        self.UI._game.has_player_won = MagicMock(return_value=False)
+
+        self.assertFalse(self.UI.is_finished())
+
+        pass
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
