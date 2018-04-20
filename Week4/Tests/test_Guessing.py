@@ -218,8 +218,25 @@ class TestGuessingGameUI(unittest.TestCase):
 
         pass
 
+    def test_is_finished(self):
+        self.UI._game.has_player_won = MagicMock(return_value=True)
+        self.UI._game.can_player_guess_again = MagicMock(return_value=True)
 
+        self.assertTrue(self.UI.is_finished())
 
+        self.UI._game.can_player_guess_again = MagicMock(return_value=False)
+
+        self.assertTrue(self.UI.is_finished())
+
+        self.UI._game.has_player_won = MagicMock(return_value=False)
+
+        self.assertTrue(self.UI.is_finished())
+
+        self.UI._game.can_player_guess_again = MagicMock(return_value=True)
+
+        self.assertFalse(self.UI.is_finished())
+
+        pass
 
 
 
