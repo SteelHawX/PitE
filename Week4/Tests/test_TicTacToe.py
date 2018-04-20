@@ -317,6 +317,47 @@ class TestTicTacToeUI(unittest.TestCase):
 
         pass
 
+    def test_input_values_valid(self):
+        self.UI._game.is_coordinate_in_row_range = MagicMock(return_value=True)
+        self.UI._game.is_coordinate_in_column_range = MagicMock(return_value=True)
+        self.UI._game.is_empty = MagicMock(return_value=True)
+
+        # is_coordinate_in_row_range is_coordinate_in_column_range is_empty
+
+        # True True True
+        self.assertTrue(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_coordinate_in_row_range = MagicMock(return_value=False)
+        # False True True
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_coordinate_in_column_range = MagicMock(return_value=False)
+        # False False True
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_empty = MagicMock(return_value=False)
+        # False False False
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_coordinate_in_row_range = MagicMock(return_value=True)
+        # True False False
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_coordinate_in_column_range = MagicMock(return_value=True)
+        # True True False
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_coordinate_in_row_range = MagicMock(return_value=False)
+        # False True False
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_empty = MagicMock(return_value=True)
+        # False True True
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        pass
+
+
 
 if __name__ == "__main__":
     unittest.main()
