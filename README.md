@@ -1,5 +1,8 @@
 # This repository is used to store my solutions to weekly PitE course assignments 
 
+[![Build Status](https://travis-ci.org/SteelHawX/PitE.svg?branch=master)](https://travis-ci.org/SteelHawX/PitE) [![Coverage Status](https://coveralls.io/repos/github/SteelHawX/PitE/badge.svg?branch=master)](https://coveralls.io/github/SteelHawX/PitE?branch=master)
+
+
 ## First homework assignment: PyWordCount
 
 
