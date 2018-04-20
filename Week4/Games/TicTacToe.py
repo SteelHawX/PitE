@@ -126,6 +126,9 @@ class TicTacToeUI(guib.GameUIBase):
         return tuple(map(int, string.split(", ")))
 
     def string_is_valid(self, string):
+        if string.count(", ") != 1:
+            return False
+
         for substring in string.split(", "):
             if not substring.isdecimal():
                 self._game_state = 2
@@ -168,12 +171,8 @@ class TicTacToeUI(guib.GameUIBase):
         return output
 
     def input_values_valid(self, input_values):
-        if len(input_values) != 2:
-            self._game_state = 2
-            return False
-        else:
-            input_row = input_values[0]
-            input_column = input_values[1]
+        input_row = input_values[0]
+        input_column = input_values[1]
         if self._game.is_coordinate_in_row_range(input_row) is True:
             if self._game.is_coordinate_in_column_range(input_column) is True:
                 if self._game.is_empty(input_row, input_column) is True:

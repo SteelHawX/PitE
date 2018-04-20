@@ -300,6 +300,107 @@ class TestTicTacToeUI(unittest.TestCase):
 
         pass
 
+    def test_string_is_valid(self):
+        self.assertTrue(self.UI.string_is_valid("0, 81923"))
+        self.assertTrue(self.UI.string_is_valid("131, 8"))
+        self.assertTrue(self.UI.string_is_valid("2400, 73"))
+
+        self.assertFalse(self.UI.string_is_valid("-1, 813"))
+        self.assertFalse(self.UI.string_is_valid(", 8"))
+        self.assertFalse(self.UI.string_is_valid(".12, 73"))
+        self.assertFalse(self.UI.string_is_valid("24^, 2"))
+        self.assertFalse(self.UI.string_is_valid("dsd, 8"))
+        self.assertFalse(self.UI.string_is_valid("2400"))
+        self.assertFalse(self.UI.string_is_valid("24,00"))
+        self.assertFalse(self.UI.string_is_valid("24, 50, 23"))
+        self.assertFalse(self.UI.string_is_valid("24, 50,23"))
+
+        pass
+
+    def test_input_values_valid(self):
+        self.UI._game.is_coordinate_in_row_range = MagicMock(return_value=True)
+        self.UI._game.is_coordinate_in_column_range = MagicMock(return_value=True)
+        self.UI._game.is_empty = MagicMock(return_value=True)
+
+        # is_coordinate_in_row_range is_coordinate_in_column_range is_empty
+
+        # True True True
+        self.assertTrue(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_coordinate_in_row_range = MagicMock(return_value=False)
+        # False True True
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_coordinate_in_column_range = MagicMock(return_value=False)
+        # False False True
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_empty = MagicMock(return_value=False)
+        # False False False
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_coordinate_in_row_range = MagicMock(return_value=True)
+        # True False False
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_coordinate_in_column_range = MagicMock(return_value=True)
+        # True True False
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_coordinate_in_row_range = MagicMock(return_value=False)
+        # False True False
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        self.UI._game.is_empty = MagicMock(return_value=True)
+        # False True True
+        self.assertFalse(self.UI.input_values_valid((0,0)))
+
+        pass
+
+
+    def test_insert_value(self):
+        self.UI.insert_values((0, 0))
+        self.assertEqual(self.UI._game.turn, self.UI._game.gameState[0][0])
+        self.UI.insert_values((2, 2))
+        self.assertEqual(self.UI._game.turn, self.UI._game.gameState[2][2])
+        self.UI.insert_values((2, 1))
+        self.assertEqual(self.UI._game.turn, self.UI._game.gameState[2][1])
+        self.UI.insert_values((0, 2))
+        self.assertEqual(self.UI._game.turn, self.UI._game.gameState[0][2])
+        self.UI.insert_values((1, 1))
+        self.assertEqual(self.UI._game.turn, self.UI._game.gameState[1][1])
+
+        pass
+
+    def test_next_turn(self):
+        self.assertEqual('O', self.UI.next_turn())
+        self.assertEqual('X', self.UI.next_turn())
+
+        pass
+
+    def test_is_finished(self):
+        self.UI._game.has_player_won = MagicMock(return_value=True)
+        self.UI._game.is_board_full = MagicMock(return_value=True)
+
+        self.assertTrue(self.UI.is_finished())
+
+        self.UI._game.has_player_won = MagicMock(return_value=False)
+
+        self.assertTrue(self.UI.is_finished())
+
+        self.UI._game.has_player_won = MagicMock(return_value=True)
+        self.UI._game.is_board_full = MagicMock(return_value=False)
+
+        self.assertTrue(self.UI.is_finished())
+
+        self.UI._game.has_player_won = MagicMock(return_value=False)
+
+        self.assertFalse(self.UI.is_finished())
+
+        pass
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
